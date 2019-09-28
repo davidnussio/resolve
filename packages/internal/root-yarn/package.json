@@ -1,0 +1,13 @@
+{
+  "name": "@internal/root-yarn",
+  "private": true,
+  "version": "0.20.28",
+  "bin": "./bin/index.js",
+  "dependencies": {
+    "@internal/helpers": "0.20.28"
+  },
+  "scripts": {
+    "start": "node ./bin/index.js",
+    "test": "echo || exit 0"
+  }
+}

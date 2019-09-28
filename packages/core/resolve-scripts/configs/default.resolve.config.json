@@ -1,0 +1,50 @@
+{
+  "port": 3000,
+  "polyfills": [],
+  "rootPath": "",
+  "staticPath": "static",
+  "staticDir": "static",
+  "distDir": "dist",
+  "routes": "client/routes.js",
+  "aggregates": [],
+  "readModels": [],
+  "viewModels": [],
+  "sagas": [],
+  "apiHandlers": [],
+  "index": "client/index.js",
+  "redux": {
+    "reducers": {},
+    "middlewares": [],
+    "sagas": [],
+    "enhancers": []
+  },
+  "storageAdapter": {
+    "module": "resolve-storage-lite",
+    "options": {
+      "databaseFile": "data/event-store.db"
+    }
+  },
+  "subscribeAdapter": {
+    "module": "resolve-subscribe-socket.io",
+    "options": {}
+  },
+  "snapshotAdapter": {
+    "module": "resolve-snapshot-lite",
+    "options": {}
+  },
+  "readModelConnectors": {},
+  "schedulers": {},
+  "eventBroker": {
+    "launchBroker": true,
+    "zmqBrokerAddress": "tcp://127.0.0.1:3500",
+    "zmqConsumerAddress": "tcp://127.0.0.1:3501",
+    "databaseFile": "data/local-bus-broker.db",
+    "batchSize": 100,
+    "upstream": true
+  },
+  "jwtCookie": {
+    "name": "jwt",
+    "maxAge": 31536000000
+  },
+  "customConstants": {}
+}

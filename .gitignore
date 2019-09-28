@@ -36,13 +36,30 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
+#gitbook build folder
+**/_book
+
 # IDE directory
 .idea
 .vscode
+vscode
+
+# npm packages
+.packages
 
 #
 dist
+lib
+es
+/website/node_modules
+/website/build
+/website/i18n
 
-#
-benchmarks/**/*.xml
-benchmarks/**/*.csv
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+
+bus.json
+lcov.info
+packages/core/resolve-zeromq/optional

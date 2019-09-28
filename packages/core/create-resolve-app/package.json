@@ -1,0 +1,46 @@
+{
+  "name": "create-resolve-app",
+  "version": "0.20.28",
+  "description": "A tool that generates boilerplate web applications based on the reSolve framework",
+  "engines": {
+    "node": ">=8.10"
+  },
+  "bin": {
+    "create-resolve-app": "./bin/index.js"
+  },
+  "main": "./lib/index.js",
+  "bugs": {
+    "url": "https://github.com/reimagined/resolve/issues"
+  },
+  "scripts": {
+    "test": "echo || exit 0",
+    "testw": "echo || exit 0"
+  },
+  "repository": "https://github.com/reimagined/resolve.git",
+  "author": "reimagined team",
+  "license": "MIT",
+  "keywords": [
+    "cqrs",
+    "eventsourcing",
+    "es",
+    "ddd"
+  ],
+  "homepage": "https://github.com/reimagined/resolve/tree/master/packages/core/create-resolve-app#readme",
+  "dependencies": {
+    "@babel/runtime": "^7.0.0",
+    "adm-zip": "^0.4.11",
+    "chalk": "^2.4.1",
+    "command-line-args": "^5.0.2",
+    "fs-extra": "^7.0.1",
+    "validate-npm-package-name": "^3.0.0",
+    "source-map-support": "^0.5.9"
+  },
+  "babelCompile": [
+    {
+      "moduleType": "cjs",
+      "moduleTarget": "server",
+      "inputDir": "./src",
+      "outDir": "./lib"
+    }
+  ]
+}

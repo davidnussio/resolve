@@ -1,132 +1,83 @@
-
 # [<img src="https://user-images.githubusercontent.com/15689049/29659048-ad0d158a-88c5-11e7-9354-dbe4bb105ad7.png" height="60">](https://github.com/reimagined/resolve/)
 
-[![Build Status](https://travis-ci.org/reimagined/resolve.svg?branch=master)](https://travis-ci.org/reimagined/resolve) [![npm version](https://badge.fury.io/js/create-resolve-app.svg)](https://badge.fury.io/js/create-resolve-app) [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![GitHub issues](https://img.shields.io/github/issues/reimagined/resolve.svg)](https://github.com/reimagined/resolve/issues) [![GitHub forks](https://img.shields.io/github/forks/reimagined/resolve.svg)](https://github.com/reimagined/resolve/network) [![GitHub stars](https://img.shields.io/github/stars/reimagined/resolve.svg)](https://github.com/reimagined/resolve/stargazers) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/reimagined/resolve/master/LICENSE)
+[![Build Status](https://travis-ci.org/reimagined/resolve.svg?branch=master)](https://travis-ci.org/reimagined/resolve) [![npm version](https://badge.fury.io/js/create-resolve-app.svg)](https://badge.fury.io/js/create-resolve-app) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/reimagined/resolve/master/LICENSE)
 
+![CQRS DDD Event Sourcing React Redux](https://user-images.githubusercontent.com/19663260/41475089-73b9620e-70c6-11e8-9ca9-633f3857626b.png)
 
-reSolve is a framework for developing apps based on CQRS and Event Sourcing using [React](https://github.com/facebook/react) + [Redux](https://github.com/reactjs/redux) on the client. It can help negate differences between your domain and technical languages, and focus on your application code.
+reSolve is a full stack functional JavaScript framework.
 
-## **📑 Table of Contents**
-* [Basic Concepts](#️-basic-concepts)
-	* [Command and Aggregate](#command-and-aggregate)
-	* [Event Store](#event-store)
-	* [Read Model and Query](#read-model-and-query)
-	* [See Also](#see-also)
-* [Quick Installation](#-quick-installation)
-* [Packages](#-packages)
-* [Examples](#-examples)
-* [Development](#development)
+- [CQRS](https://martinfowler.com/bliki/CQRS.html) - independent Command and Query sides.
+- [DDD Aggregate](https://martinfowler.com/bliki/DDD_Aggregate.html) support.
+- [Event sourcing](https://martinfowler.com/eaaDev/EventSourcing.html) - using events as a source of truth and calculating read models from them.
+- Integrates with [React](https://reactjs.org) and [Redux](https://redux.js.org) for seamless development experience.
+- [React Native](https://facebook.github.io/react-native/) support.
 
-## **🏗️ Basic Concepts**
-reSolve is a set of libraries which can be used independently or simultaneously. Each library is responsible for a particular CQRS + Event Sourcing system part as shown in the image below.
+## :rocket: Getting Started
 
+### Installation
 
-![CQRS schema](https://user-images.githubusercontent.com/15689049/30436232-4932f952-9974-11e7-8e3d-575cc5de407e.png)  
-_*This scheme is based on the "CQRS with Event Sourcing" image from the [Event Sourcing for Functional Programmers](http://danielwestheide.com/talks/flatmap2013/slides/#/) presentation.*_
+Make sure you have **NodeJS** version **8.10.0** or higher.
 
-### Command and Aggregate 
-When you need to change the system's state, you send a Command. A command is addressed to a Domain Aggregate. An Aggregate is a cluster of logically related objects, containing enough information to perform a command as one transaction. It handles a command, checks whether it can be executed and generates an event to change the system's state. A new event is sent to [Event Store](#event-store). 
-Refer to [DDD_Aggregates](https://martinfowler.com/bliki/DDD_Aggregate.html) or [DDD, Event Sourcing, and CQRS Tutorial: design](http://cqrs.nu/tutorial/cs/01-design) for more information on aggregates.
+Use [create-resolve-app](packages/core/create-resolve-app) package to create a new reSolve application. The easiest way is to use [npx](https://www.npmjs.com/package/npx/v/1.1.1) ()
 
-The [resolve-command](packages/resolve-command) library allows you to handle commands and send produced events to the event store based on aggregate definitions and their commands. All aggregates are passed to `resolve-command` as an array. The library creates an Aggregate Repository and finds or instantiates a particular aggregate to handle each command.
-
-You can send a command on the client side by dispatching a redux action of the appropriate type. To do this, use the [sendComand](packages/resolve-redux#sendcommand) from the [resolve-redux](packages/resolve-redux) package.
-
-Refer to [package documentation](packages/resolve-command#example) for an example of `resolve-command` usage.
-
-### Event Store
-The Event Store stores all events aggregates produce and delivers them to subscribers. It combines a persistent storage and message bus. 
-
-reSolve provides the [resolve-es](packages/resolve-es) package containing the event store implementation, as well as [storage-adapters](packages/storage-adapters) and [bus-adapters](packages/bus-adapters) allowing you to specify where to store and how to send events.
-
-### Read Model and Query
-The Read Model represents a system state or its part. It is built using Projection functions. All events from the beginning of time are applied to a read model to build its current state. Queries are used to get data from a read model. 
-See [Event Sourcing - Projections](https://abdullin.com/post/event-sourcing-projections/) or [DDD, Event Sourcing, and CQRS Tutorial: read models](http://cqrs.nu/tutorial/cs/03-read-models) for more information.
-
-You can use [resolve-query](packages/resolve-query)  as a query. This package allows you to obtain data from a read model by a [GraphQL](http://graphql.org/learn/) request.
-
-Refer to [package documentation](packages/resolve-query#example) for an example of `resolve-query` usage. 
-
-### See Also
-Learn more about related concepts:
-
-* [Why using DDD, CQRS and Event Sourcing](https://github.com/cer/event-sourcing-examples/wiki/WhyEventSourcing)  
-* [Education course for DDD (Domain Driven Design)](http://cqrs.nu/)
-* [Building Scalable Applications Using Event Sourcing and CQRS](https://medium.com/technology-learning/event-sourcing-and-cqrs-a-look-at-kafka-e0c1b90d17d8)
-* [Blog about DDD](http://danielwhittaker.me/category/ddd/)
-* [Immutability Changes Everything](http://cidrdb.org/cidr2015/Papers/CIDR15_Paper16.pdf)
-
-
-
-## **🚀 Quick Installation**
-> Note: Installing a package globally may require administrative privileges. That means you have to use the sudo command for Unix-based systems or run a terminal with administrative privileges on Windows systems.
-
-
-Create a new reSolve application using the [create-resolve-app](packages/create-resolve-app) package.
-
-```bash
-npm i -g create-resolve-app
-create-resolve-app my-resolve-app
-cd my-resolve-app
+```sh
+npx create-resolve-app my-awesome-app
+cd my-awesome-app
 npm run dev
 ```
-![Terminal](https://user-images.githubusercontent.com/15689049/29822549-8513584c-8cd4-11e7-8b65-b88fdad7e4d1.png)
-The application will be opened in your browser at [http://localhost:3000/](http://localhost:3000/).
 
-Refer to the [reSolve Getting Started Guide](packages/create-resolve-app) for detailed information on how to create a new reSolve application and all the available scripts.
+<details>
+<summary>You can also use npm or yarn tools</summary>
 
-## **📚 Packages**
+#### [npm](https://www.npmjs.com/)
 
-reSolve includes the following libraries which can be used independently or simultaneously.
+> Note: Installing a package globally may require administrative privileges.
 
-App generator libraries:
-* 🚀 [create-resolve-app](packages/create-resolve-app)  
-	Creates a new application based on reSolve.
+```sh
+npm i -g create-resolve-app
+create-resolve-app my-awesome-app
+cd my-awesome-app
+npm run dev
+```
 
-Core libraries:
-* 📢 [resolve-command](packages/resolve-command)  
-	Creates a function to execute a command.
+#### [yarn](https://yarnpkg.com/lang/en/)
 
-* 🏣 [resolve-es](packages/resolve-es)  
-	Provides an event store implementation.
+```sh
+yarn create resolve-app my-awesome-app
+cd my-awesome-app
+yarn run dev
+```
 
-* 🔍 [resolve-query](packages/resolve-query)  
-	Creates a function to execute a query.
+</details>
+<p></p>
 
-* 🔩 [resolve-redux](packages/resolve-redux)  
-	Helper for creating the Redux storage.
+Your application will be running at http://localhost:3000/.
 
+### Creating a new app with a code example
 
-Adapters for event store:
-* 🚌 Bus adapters specifying how to send events:
-    * [resolve-bus-memory](packages/bus-adapters/resolve-bus-memory) (recommended for debugging purposes)
-    * [resolve-bus-rabbitmq](packages/bus-adapters/resolve-bus-rabbitmq)
-    * [resolve-bus-zmq](packages/bus-adapters/resolve-bus-zmq) 
+There are several [code examples](./examples/) provided. You can add code from these examples into your projects. To list the available examples use the create-resolve-app -h command.
 
+To create a new application with the code of the specific example use the create-resolve-app command with the -e flag followed by the example's name.
 
-* 🛢 Storage adapters specifying where to store events:
-    * [resolve-storage-mongo](packages/storage-adapters/resolve-storage-mongo)
-	* [resolve-storage-lite](packages/storage-adapters/resolve-storage-lite)
+For instance, to run the [shopping-list example](./examples/shopping-list), run:
 
+```sh
+npx create-resolve-app resolve-example -e shopping-list
+```
 
-## **💻 Examples**
+## :books: Documentation
 
-* [resolve-scripts-with-router-2](examples/resolve-scripts-with-router-2)  
-	[resolve-scripts-with-router-4](examples/resolve-scripts-with-router-4)  
-	These examples show how to use `resolve-scripts` with the `react-router v2.x.x`  and `react-router v4.x.x`.
+You can find reSolve documentation in the [docs section](./docs).
 
-* [two-level todo list](examples/todo)  
-	This example is an application with several aggregate types related to each other. It also shows how to implement a custom backend API server.
+To get started with reSolve, see the [step-by-step tutorial](./docs/tutorial.md).
 
-## Development
+## :loudspeaker: Get in Touch
 
-* Report bugs and request features on our [issues page](https://github.com/reimagined/resolve/issues).
-* [See the change log](CHANGELOG.md).
-* Code released under the [MIT license](LICENSE.md).
-* reSolve is developed by Developer Express Inc. ([https://devexpress.com](https://devexpress.com))
+- Ask questions on Stackoverlow with [resolvejs tag](https://stackoverflow.com/questions/ask?tags=resolvejs)
+- Use [GitHub Issues](https://github.com/reimagined/resolve/issues) to report bugs and suggest features
+- Follow [@resolvejs on Twitter](https://twitter.com/resolvejs) or join [our Facebook page](https://www.facebook.com/resolvejs/) for product news and updates
+- Email the team reimagined@devexpress.com
 
-## Join us
+reSolve is developed by [Developer Express Inc.](https://devexpress.com)
 
-* [Twitter](https://twitter.com/resolvejs)
-* [Facebook](https://www.facebook.com/resolvejs/)
-* Learn how to make [Hacker News application](https://github.com/reimagined/hacker-news-resolve)
+![Analytics](https://ga-beacon.appspot.com/UA-118635726-1/readme.md?pixel)

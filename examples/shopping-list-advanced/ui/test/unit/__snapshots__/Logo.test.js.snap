@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<NavbarHeader>
+  <NavbarBrand>
+    <ContextBasedComponent
+      className="example-icon"
+      src="/resolve-logo.png"
+    />
+    Shopping List
+  </NavbarBrand>
+  <NavbarToggle />
+</NavbarHeader>
+`;
